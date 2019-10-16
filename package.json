@@ -1,0 +1,31 @@
+{
+  "name": "inventory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.549.0",
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "memory-cache": "^0.2.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.17.1",
+    "nodemailer": "^6.3.0",
+    "xml-js": "^1.6.11",
+    "xml-to-json-stream": "^1.1.0",
+    "xml2js": "^0.4.22",
+    "xml2json": "^0.11.2"
+  }
+}

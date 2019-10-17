@@ -91,7 +91,7 @@ NODE_ENV=development
 ## Screenshot from the app
 <p align='center'>
   <span>
-  <img src='https://user-images.githubusercontent.com/43402837/62836071-c7321380-bc89-11e9-951f-b1d72a75533b.png' width=200 />' width=200 />
+  <img src='https://user-images.githubusercontent.com/43402837/66977503-6d5a2980-f0d0-11e9-910b-548e1bb8a983.png' width=200 />'
   <img src='https://user-images.githubusercontent.com/43402837/66977519-7c40dc00-f0d0-11e9-8d44-37831a59c4c7.png' width=200 />
   <img src='https://user-images.githubusercontent.com/43402837/66977526-81059000-f0d0-11e9-981e-178784752749.png' width=200 />
   <img src='https://user-images.githubusercontent.com/43402837/66977534-895dcb00-f0d0-11e9-8e20-a43ef8f3fe6e.png' width=200 />

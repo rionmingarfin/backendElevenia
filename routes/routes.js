@@ -29,7 +29,7 @@ module.exports  = function (app){
     app.post('/api/v3/product',upload.single("image"),auth,product.addProduct)
     app.patch('/api/v3/product/:id',upload.single("image"),auth,product.updateProduct)
     app.delete('/api/v3/product/:id',product.delete)
-    app.get('/api/v3/product',auth,product.getElevenia)
+    app.get('/api/v3/productElvenia',auth,product.getElevenia)
     //transaksi
      app.post('/api/v3/transaksi',auth,transaksi.createtrnsaksi)
      app.get('/api/v3/history',auth,transaksi.getTransaksi)

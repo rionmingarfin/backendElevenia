@@ -2,16 +2,10 @@ require('dotenv/config')
 const mysql = require('mysql')
 
 const conn = mysql.createConnection({
-    // host: process.env.HOST_DB,
-    // user: process.env.USER_DB,
-    // password: process.env.PASSWORD_DB,
-    // database: process.env.DATABASE_DB,
-
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'elevenia'
-
+    host: process.env.HOST_DB,
+    user: process.env.USER_DB,
+    password: process.env.PASSWORD_DB,
+    database: process.env.DATABASE_DB,
 })
 
 conn.connect(function (err) {

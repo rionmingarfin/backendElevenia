@@ -4,6 +4,7 @@ const crypto = require('crypto')
 const algorithm = process.env.ALGORTIHM
 const connect = require('../database/connect')
 const jwt = require('jsonwebtoken')
+const response = require('../response/response')
 
 function encrypt(text) {
     const key = crypto.scryptSync(text, 'salt', 24);
@@ -108,3 +109,65 @@ exports.login = function (req, res) {
         }
     )
 }
+exports.getAll = (req, res) => {
+    connect.query(
+        'SELECT * FROM user ORDER BY id ASC',
+        function (error, rows, field) {
+            if (error) {
+                res.status(400).json('error')
+            } else {
+                res.json(rows)
+            }
+        }
+    )
+}
+
+exports.updateUser = async (req, res) => {
+        let id = req.params.id
+        let status = req.body.status
+
+        let sqlupdate = `UPDATE user SET status=? WHERE id ='${id}'`
+        console.log(sqlupdate)
+        connect.query(sqlupdate, [status,id],
+            function (error, rows, field) {
+                // console.log(rows)
+                if (error) {
+                    // console.log(error)
+                    res.status(400).json('eror')
+                } else {
+                    let data = {
+                        status: 201,
+                        message: "data sucesfully",
+                        data: {
+                            id: id,
+                            status : status
+                        }
+                    }
+                    return res.status(202).json(data).end();
+                }
+            }
+        )
+    }
+
+    exports.getUserId = (req, res) => {
+        let id = req.params.id;
+        if (id === 0 || id === '') {
+            response.error('error', res, 404)
+        } else {
+            connect.query(
+                `SELECT * FROM user WHERE id=${id}`,
+                [id],
+                function (error, rows, field) {
+                    if (error) {
+                        res.status(400).json('eror')
+                    } else {
+                        if (rows.length === 0 || rows.length === '') {
+                            response.error('data not found', res, 404);
+                        } else {
+                            res.status(200).json(rows);
+                        }
+                    }
+                }
+            )
+        }
+    }

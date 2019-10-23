@@ -40,5 +40,8 @@ module.exports  = function (app){
     //user
     app.post('/api/v3/register',user.insert)
     app.post('/api/v3/login',user.login)
+    app.get('/api/v3/user',auth,user.getAll)
+    app.patch('/api/v3/user/:id',auth,user.updateUser)
+    app.get('/api/v3/user/:id',auth,user.getUserId)
     
 }

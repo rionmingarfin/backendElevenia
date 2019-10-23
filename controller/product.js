@@ -94,7 +94,7 @@ exports.getProductId = (req, res) => {
         Response.error('error', res, 404)
     } else {
         connect.query(
-            `SELECT product.id AS id_product,product.id_user AS id_user,product.product_no AS product_no,product.name AS name,product.price AS price,product.code AS code,product.stok AS stok,product.description AS description,product.image AS image
+            `SELECT product.id AS id_product,product.product_no AS product_no,product.name AS name,product.price AS price,product.code AS code,product.stok AS stok,product.description AS description,product.image AS image
             FROM product 
             WHERE product.id=${id}`,
             [id],
@@ -103,7 +103,7 @@ exports.getProductId = (req, res) => {
                     res.status(400).json('eror')
                 } else {
                     if (rows.length === 0 || rows.length === '') {
-                        Response.error('data not found', res, 404);
+                        response.error('data not found', res, 404);
                     } else {
                         res.status(200).json(rows);
                     }
@@ -114,12 +114,7 @@ exports.getProductId = (req, res) => {
 }
 exports.delete = (req, res) => {
     const id = req.params.id
-    const id_user = req.body.id_user
-
-    connect.query(`SELECT * FROM product WHERE id_user='${id_user}'`,
-        function (error, rows, field) {
-            console.log(rows)
-            if (rows.length != 0) {
+    
                 if (id === 0 || id === '') {
                     response.error('error', res)
                 } else {
@@ -146,12 +141,6 @@ exports.delete = (req, res) => {
                         }
                     )
                 }
-            } else {
-                res.send({
-                    message: "anda bukan user product"
-                })
-            }
-        })
 }
 exports.addProduct = async (req, res) => {
 
@@ -178,7 +167,6 @@ exports.addProduct = async (req, res) => {
 
         image = await getUrl();
     }
-    let id = req.body.id
     let product_no = Math.random().toString(36).substring(2, 15);
     let prdNm = req.body.prdNm;
     let selPrc = req.body.selPrc;
@@ -186,30 +174,27 @@ exports.addProduct = async (req, res) => {
     let stok = req.body.stok;
     let description = req.body.description;
 
-    if (!id) {
-        res.status(400).send('Id User is required');
-    } else if (!image) {
+   if (!image) {
         res.status(400).send('image is required');
     } else {
-        let sql2 = `INSERT INTO product SET id_user=?,product_no ='${product_no}' ,name=?,price=?,code='${sellerPrdCd}',stok=?,description=?,image=?`
+        let sql2 = `INSERT INTO product SET product_no ='${product_no}' ,name=?,price=?,code='${sellerPrdCd}',stok=?,description=?,image=?`
         console.log(sql2)
         connect.query(
             sql2,
-            [id, prdNm, selPrc, stok, description, image],
+            [prdNm, selPrc, stok, description, image],
             function (error, rows, field) {
                 console.log(rows)
                 if (error) {
                     res.status(400).json('eror')
                 } else {
-                    let idInsert = rows.insertId
+                    let id = rows.insertId
                     let data = {
                         status: 201,
                         message: "data sucesfully",
-                        result: {
-                            id: idInsert,
+                        data: {
                             id: id,
-                            prdNm: prdNm,
-                            selPrc: selPrc,
+                            name: prdNm,
+                            price: selPrc,
                             sellerPrdCd: sellerPrdCd,
                             stok: stok,
                             description: description,
@@ -273,10 +258,10 @@ exports.updateProduct = async (req, res) => {
                     let data = {
                         status: 201,
                         message: "data sucesfully",
-                        result: {
+                        data: {
                             id: id,
-                            prdNm: prdNm,
-                            selPrc: selPrc,
+                            name: prdNm,
+                            price: selPrc,
                             sellerPrdCd: sellerPrdCd,
                             stok: stok,
                             description: description,
